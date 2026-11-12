@@ -15,3 +15,6 @@
 
 settings:
   enabled: true
+
+# The repo is public so the baseline ruleset and auto-merge can apply
+# (GitHub Free has neither for private repos).
