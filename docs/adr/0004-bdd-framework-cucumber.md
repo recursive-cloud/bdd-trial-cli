@@ -2,6 +2,7 @@
 
 - Status: Accepted
 - Date: 2026-11-12
+- Amended: 2026-11-12, step definitions load through Node's native type stripping and tsx was removed (PR #7); the in-place edit was correct under ADR 0001.
 
 ## Context
 The project exists to prove the delivery workflow end to end, including a real BDD acceptance suite. Its product is a CLI, and the operator specified @cucumber/cucumber with TypeScript step definitions.
