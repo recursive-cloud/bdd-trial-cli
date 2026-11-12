@@ -1,9 +1,14 @@
 /**
- * CLI entry point.
+ * Startup report hook for the BDD acceptance suite.
  *
- * The startup API is deliberately side-effect free: calling `main` returns the
- * report the caller (the acceptance suite or a future CLI wrapper) displays.
+ * This module is not the executable entry point; `src/cli.ts` owns the
+ * `run(argv, io)` command runner and its direct-run guard. `main` and
+ * `STARTUP_REPORT` exist so the acceptance suite
+ * (`features/step_definitions/cli-startup.ts`) can prove the TypeScript wiring
+ * loads and reports the expected startup string.
  */
+export const STARTUP_REPORT = 'bdd-trial-cli';
+
 export function main(): string {
-  return 'bdd-trial-cli';
+  return STARTUP_REPORT;
 }

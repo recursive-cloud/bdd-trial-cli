@@ -8,7 +8,7 @@ The CLI needs production source, a cucumber acceptance suite, and unit tests, ke
 
 ## Decision
 We will use:
-- `src/` for production source (`index.ts` entry, `greet.ts` command).
+- `src/` for production source (`cli.ts` executable entry exposing `run(argv, io)` behind a direct-run guard, `greet.ts` for the greet command and greeting logic, `index.ts` for the harness-wiring stub the acceptance suite consumes).
 - `features/` for Gherkin scenarios, with step definitions in `features/step_definitions/`.
 - `tests/unit/` for node:test unit tests.
 - `docs/adr/` for decision records.
