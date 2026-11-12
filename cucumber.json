@@ -1,6 +1,6 @@
 {
   "default": {
-    "paths": ["features/*.feature"],
+    "paths": ["features/**/*.feature"],
     "import": ["features/step_definitions/**/*.ts"],
     "format": ["progress"],
     "publish": false
