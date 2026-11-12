@@ -50,7 +50,7 @@ When('the CLI runs {string}', async function (command: string) {
 
 Then('stdout is {string}', function (expected: string) {
   assert.ok(result, 'the CLI must have run before asserting stdout');
-  assert.equal(result.stdout, expected);
+  assert.equal(result.stdout.replace(/\r?\n$/, ''), expected);
 });
 
 Then('the exit code is {int}', function (expected: number) {
