@@ -1,0 +1,12 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Sensitivity: private (the Sensitivity line in AGENTS.md).
+  // This project pins every subagent tier to pro by operator budget decision
+  // (2026-11-12): the free and local tiers are unavailable. The private
+  // sensitivity rule would allow free cloud models for research only; this
+  // denies them outright to match the operator's decision.
+  "policies": [
+    { "action": "tool.use", "resource": "subagent:*-free", "effect": "deny" },
+    { "action": "tool.use", "resource": "subagent:*-local", "effect": "deny" },
+  ],
+}
