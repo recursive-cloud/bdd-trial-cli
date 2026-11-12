@@ -6,6 +6,12 @@ Sensitivity: private
 ## Architecture
 - Architecture decisions live in `docs/adr/`: 0002 runtime, 0003 repository layout, 0004 BDD framework, 0005 unit-test runner.
 
+## Commands
+- `npm run build` typechecks the project with `tsc --noEmit`.
+- `npm test` runs the unit suite, then the BDD suite.
+- `npm run test:unit` runs only the node:test files under `tests/unit`.
+- `npm run test:bdd` runs cucumber against the features in `features/`.
+
 ## Conventions
 - Conventional Commits (`feat:`, `fix:`, `chore:`).
 
