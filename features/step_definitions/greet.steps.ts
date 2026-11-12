@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { Then, When } from '@cucumber/cucumber';
+import { Before, Then, When } from '@cucumber/cucumber';
 
 type CliResult = {
   stdout: string;
@@ -9,6 +9,10 @@ type CliResult = {
 };
 
 let result: CliResult | undefined;
+
+Before(function () {
+  result = undefined;
+});
 
 function runCli(command: string): Promise<CliResult> {
   const argv = command

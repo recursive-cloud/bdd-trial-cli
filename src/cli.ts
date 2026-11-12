@@ -1,9 +1,10 @@
 /**
  * CLI entry point for the greet command.
  *
- * `run` is side-effect free apart from the injected io sink, so tests can
- * capture output without spawning a process. Executing this module directly
- * dispatches `process.argv` through `run` and sets the process exit code.
+ * `run` is side-effect free when an io sink is injected, so tests can capture
+ * output without spawning a process. Without a sink it dispatches to the
+ * process stdout and stderr streams. Executing this module directly dispatches
+ * `process.argv` through `run` and sets the process exit code.
  */
 import { pathToFileURL } from 'node:url';
 import { greet } from './greet.ts';
@@ -30,7 +31,12 @@ export function run(argv: readonly string[], io: CliIo = defaultIo): number {
   const [command, ...rest] = positionals;
   const name = command === 'greet' ? rest[0] : undefined;
 
-  if (name === undefined) {
+  if (
+    command !== 'greet' ||
+    rest.length > 1 ||
+    name === undefined ||
+    name === ''
+  ) {
     io.writeErr(USAGE);
     return 1;
   }

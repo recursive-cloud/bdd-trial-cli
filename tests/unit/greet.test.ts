@@ -51,10 +51,7 @@ describe('run', () => {
     const exitCode = run(['greet', 'Ada'], captured.io);
 
     assert.equal(exitCode, 0);
-    assert.ok(
-      captured.stdout().includes('Hello, Ada!'),
-      `expected stdout to contain the greeting, got ${JSON.stringify(captured.stdout())}`,
-    );
+    assert.equal(captured.stdout(), 'Hello, Ada!\n');
   });
 
   it('writes usage to stderr and exits 1 without a name', () => {
@@ -64,10 +61,27 @@ describe('run', () => {
 
     assert.equal(exitCode, 1);
     assert.equal(captured.stdout(), '');
-    assert.ok(
-      captured.stderr().includes('Usage: bdd-trial-cli greet <name>'),
-      `expected stderr to contain the usage line, got ${JSON.stringify(captured.stderr())}`,
-    );
+    assert.equal(captured.stderr(), 'Usage: bdd-trial-cli greet <name>\n');
+  });
+
+  it('writes usage to stderr and exits 1 for an empty name', () => {
+    const captured = capture();
+
+    const exitCode = run(['greet', ''], captured.io);
+
+    assert.equal(exitCode, 1);
+    assert.equal(captured.stdout(), '');
+    assert.equal(captured.stderr(), 'Usage: bdd-trial-cli greet <name>\n');
+  });
+
+  it('writes usage to stderr and exits 1 for extra positionals', () => {
+    const captured = capture();
+
+    const exitCode = run(['greet', 'Ada', 'extra'], captured.io);
+
+    assert.equal(exitCode, 1);
+    assert.equal(captured.stdout(), '');
+    assert.equal(captured.stderr(), 'Usage: bdd-trial-cli greet <name>\n');
   });
 
   it('honours --shout in any position', () => {
@@ -76,9 +90,6 @@ describe('run', () => {
     const exitCode = run(['--shout', 'greet', 'Ada'], captured.io);
 
     assert.equal(exitCode, 0);
-    assert.ok(
-      captured.stdout().includes('HELLO, ADA!'),
-      `expected stdout to contain the shouted greeting, got ${JSON.stringify(captured.stdout())}`,
-    );
+    assert.equal(captured.stdout(), 'HELLO, ADA!\n');
   });
 });
