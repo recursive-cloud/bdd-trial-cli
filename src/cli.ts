@@ -29,14 +29,9 @@ export function run(argv: readonly string[], io: CliIo = defaultIo): number {
   const shout = argv.includes('--shout');
   const positionals = argv.filter((arg) => arg !== '--shout');
   const [command, ...rest] = positionals;
-  const name = command === 'greet' ? rest[0] : undefined;
+  const name = rest[0] ?? '';
 
-  if (
-    command !== 'greet' ||
-    rest.length > 1 ||
-    name === undefined ||
-    name === ''
-  ) {
+  if (command !== 'greet' || rest.length !== 1 || name === '') {
     io.writeErr(USAGE);
     return 1;
   }

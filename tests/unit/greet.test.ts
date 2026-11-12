@@ -2,12 +2,10 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { greet } from '../../src/greet.ts';
 import { run } from '../../src/cli.ts';
+import type { CliIo } from '../../src/cli.ts';
 
 type IoCapture = {
-  io: {
-    writeOut: (chunk: string) => void;
-    writeErr: (chunk: string) => void;
-  };
+  io: CliIo;
   stdout: () => string;
   stderr: () => string;
 };
@@ -41,6 +39,10 @@ describe('greet', () => {
 
   it('uppercases a lowercase name when shouting', () => {
     assert.equal(greet('grace', { shout: true }), 'HELLO, GRACE!');
+  });
+
+  it('accepts the empty string; the CLI layer owns non-empty validation', () => {
+    assert.equal(greet(''), 'Hello, !');
   });
 });
 
