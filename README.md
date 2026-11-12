@@ -6,7 +6,7 @@ A small TypeScript CLI that greets you by name. The repo is a throwaway trial bu
 
 Node.js 22.18.0 or later. `package.json` sets `engines.node` to `>=22.18.0`, and `.nvmrc` pins `22.18.0`.
 
-The CLI and the tests run TypeScript directly, with no build step; the BDD suite loads TypeScript through tsx (see `docs/adr/0002-runtime-typescript-on-node-22.md`).
+The CLI and the tests run TypeScript directly, with no build step; the BDD suite loads TypeScript step definitions through Node's native type stripping (see `docs/adr/0002-runtime-typescript-on-node-22.md`).
 
 ## Install
 
